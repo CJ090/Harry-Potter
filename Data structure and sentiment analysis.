@@ -1,0 +1,273 @@
+from nltk.sentiment.vader import SentimentIntensityAnalyzer 
+sia = SentimentIntensityAnalyzer()
+import re
+def find_offsets(haystack, needle):
+    """
+    Find the start of all (possibly-overlapping) instances of needle in haystack
+    """
+    offs = -1
+    while True:
+        offs = haystack.find(needle, offs+1)
+        if offs == -1:
+            break
+        else:
+            yield offs
+#Sorcerers Stone
+
+sc_txt = open("HP1 Sorcerer of Stone.txt", 'r')
+sc = str(sc_txt.readlines())
+sc_data = sc.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+sc_chunk = data2 = re.split('\.\"\,\s\"|', sc_data)
+#print(sc_chunk)
+indices = [i for i, s in enumerate(sc_chunk) if 'Crabbe and Goyle' in s]
+print(indices)
+for chunk in sc_chunk:
+    vs = sia.polarity_scores(chunk)
+    output = "{:-<65} {}".format(chunk, str(vs))
+    #print(vs)
+    #print(output)
+
+    #CHARACTER RELATIONSHIP OVERLAY
+
+    #print(find_offsets(chunk, "Ron and Hermione"))
+    har = find_offsets(chunk, "Harry and Ron")
+    #print(har)
+    trio = find_offsets(chunk, "Harry, Ron, and Hermione")
+    #print(trio)
+    fag = find_offsets(chunk, "Fred and George")
+    #print(fag)
+    laj = find_offsets(chunk, "Lily and James")
+    #print(laj)
+    cag = find_offsets(chunk, "Crabbe and Goyle")
+    #print(cag)
+       
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[125, 133, 145, 156, 158, 166, 189, 232, 278, 282]
+#Chamber of Secrets
+
+cs_txt = open("HP2 Chamber of Secrets.txt", 'r', encoding="utf8")
+cs = str(cs_txt.readlines())
+cs_data = cs.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+cs_chunk = re.split('\.\"\,\s\"|', cs_data)
+#print(len(cs_chunk))
+indices = [i for i, s in enumerate(cs_chunk) if 'Crabbe and Goyle' in s]
+print(indices)
+for i in cs_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+
+    #CHARACTER RELATIONSHIP OVERLAY
+
+    for r in find_offsets(i, "Ron and Hermione"):
+        rah = r
+        #print(r)
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+        #print(h)
+    for f in find_offsets(i, "Fred and George"):
+        fag = f
+        #print(f)
+    for l in find_offsets(i, "Lily and James"):
+        lag = l
+        #print(l)
+    for c in find_offsets(i, "Crabbe and Goyle"):
+        cag = c
+        #print(c)
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[50, 127, 129, 136, 138, 144]
+#Prisoner of Azkaban
+
+pa_txt = open("HP3 Prisoner of Azkaban.txt", 'r', encoding="utf8")
+pa = str(pa_txt.readlines())
+pa_data = pa.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+#print(pa_data)
+pa_chunk = re.split('\.\"\,\"|', pa_data)
+indices = [i for i, s in enumerate(pa_chunk) if 'Crabbe and Goyle' in s]
+print(indices)
+for i in pa_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+
+    for r in find_offsets(i, "Ron and Hermione"):
+        rah = r
+        #print(rah)
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+        #print(har)
+    for v in find_offsets(i, "Vernon and Aunt"):
+        vap = v
+    for p in find_offsets(i, "Petunia and Uncle"):
+        vap2 = p
+        #print(vap2) 
+    for s in find_offsets(i, "Malfoy, Crabbe, and Goyle"):
+        sly_trio = s
+        #print(sly_trio)                 
+    for t in find_offsets(i, "Harry, Ron, and Hermione"):
+        trio = t
+        #print(trio)
+    for f in find_offsets(i, "Fred and George"):
+        fag = f
+        #print(fag)
+    for c in find_offsets(i, "Crabbe and Goyle"):
+        cag = c
+        #print(cag)
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[62, 65, 81, 86, 87, 93, 100, 101, 121, 240, 247, 264, 268]
+#Goblett of Fire
+
+gf_txt = open("HP4 Goblet of Fire.txt", 'r', encoding="utf8")
+gf = str(gf_txt.readlines())
+gf_data = gf.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+gf_chunk = re.split('\.\"\,\"|', gf_data)
+indices = [i for i, s in enumerate(gf_chunk) if 'Malfoy, Crabbe, and Goyle' in s]
+print(indices)
+for i in gf_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+
+    for r in find_offsets(i, "Ron and Hermione"):
+        rah = r
+        #print(rah)
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+        #print(har)
+    for t in find_offsets(i, "Harry, Ron, and Hermione"):
+        trio = t
+        #print(trio)
+    for b in find_offsets(i, "Bill, Charlie, and Percy"):
+        bcp = b
+        #print(bcp)
+    for s in find_offsets(i, "Malfoy, Crabbe, and Goyle"):
+        sly_trio = s
+        #print(sly_trio)
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[188, 230, 343, 467, 509, 604, 606, 723, 731, 736]
+#Order of the Pheonix
+
+op_txt = open("HP5 Order of Phoenix.txt", 'r', encoding="utf8")
+op = str(op_txt.readlines())
+op_data = op.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+op_chunk = re.split('\.\"\,\s\"|', op_data)
+indices = [i for i, s in enumerate(op_chunk) if 'Malfoy, Crabbe and Goyle' in s]
+print(indices)
+for i in op_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+    for r in find_offsets(i, "Harry, Ron, and, Hermione"):
+        rah = r
+        #print(rah)
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+        #print(har)
+    for t in find_offsets(i, "Harry, Ron, and, Hermione"):
+        trio = t
+        #print(trio)
+    for f in find_offsets(i, "Fred and George"):
+        fag = f
+        #print(fag)
+    for l in find_offsets(i, "Fred, George, and Lee"):
+        al= l
+        #print(al)
+    for g in find_offsets(i, "Fred, George, and Ginny"):
+        bag = g
+        #print(bag)
+    for b in find_offsets(i, "Fred, George, and Ron"):
+        bros = b
+        #print(bros)
+    for s in find_offsets(i, "Malfoy, Crabbe, and Goyle"):
+        sly_trio = s
+        #print(sly_trio)
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[552, 682, 913, 928]
+#Half Blood Prince
+
+hbp_txt = open("HP6 Half Blood Prince.txt", 'r', encoding="utf8")
+hbp = str(hbp_txt.readlines())
+hbp_data = hbp.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+hbp_chunk = re.split('\.\"\,\s\"|', hbp_data)
+indices = [i for i, s in enumerate(hbp_chunk) if 'Draco Malfoy' in s]
+print(indices)
+#print(len(hbp_chunk))
+for i in hbp_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+
+    for da in find_offsets(i, "Harry and Dumbledore"):
+        had = da
+    for dah in find_offsets(i, "Dumbledore and Harry"):
+        had2 = dah
+        #print(had2)
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+        #print(har)
+    for r in find_offsets(i, "Ron and Hermoine"):
+        rah = r
+        #print(rah)
+    for her in find_offsets(i, "Hermoine and Ron"):
+            rah2 = her
+            #print(rah2)
+    for t in find_offsets(i, "Harry, Ron, and Hermione"):
+        trio = t
+        #print(trio)
+    for f in find_offsets(i, "Fred and George"):
+        fag = f
+        #print(fag)
+    for d in find_offsets(i, "Draco Malfoy"):
+        draco = d
+        #print(draco)
+   #Malfoy is on his own. The decision not to use his last name
+    #alone is because it would blanket the other data
+    #however, malfoy is mentioned on his own more than with C&G
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[158, 179, 187, 201, 226, 240, 348, 357, 391, 525, 543, 548, 587, 597, 604, 620, 716, 724, 752]
+#Deathly Hallows
+
+dh_txt = open("HP7 Deathly Hallows.txt", 'r')
+dh = str(dh_txt.readlines())
+dh_data = dh.replace("\\n'", "").replace('\\n"', "").replace("\'", "").replace(" , ","")
+dh_chunk = re.split('\.\"\,\s\"|', dh_data)
+indices = [i for i, s in enumerate(dh_chunk) if "Hermoine and Ron" in s]
+print(indices)
+for i in dh_chunk:
+    vs = sia.polarity_scores(i)
+    output = "{:-<65} {}".format(i, str(vs))
+    #print(vs)
+
+    for h in find_offsets(i, "Harry and Ron"):
+        har = h
+    for roh in find_offsets(i, "Ron and Harry"):
+        har2 = roh
+        #print(har2)
+    for r in find_offsets(i, "Ron and Hermoine"):
+        rah = r
+    for her in find_offsets(i, "Hermoine  Ron"):
+        rah2 = her
+        #print(rah2)
+    for t in find_offsets(i, "Harry, Ron, and Hermione"):
+        trio = t
+        #print(trio)
+    for hh in find_offsets(i, "Harry and Hermione"):
+        hah = hh
+    for her in find_offsets(i, "Hermoine and Harry"):
+        hah2 = her
+        #print(hah2)
+    for bf in find_offsets(i, "Bill and Fleur"):
+        baf = bf
+        #print(baf)
+    for f in find_offsets(i, "Fred and George"):
+        fag = f
+        #print(fag)
+C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
+  return _compile(pattern, flags).split(string, maxsplit)
+[]

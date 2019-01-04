@@ -41,9 +41,6 @@ for chunk in sc_chunk:
     cag = find_offsets(chunk, "Crabbe and Goyle")
     #print(cag)
        
-C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
-  return _compile(pattern, flags).split(string, maxsplit)
-[125, 133, 145, 156, 158, 166, 189, 232, 278, 282]
 #Chamber of Secrets
 
 cs_txt = open("HP2 Chamber of Secrets.txt", 'r', encoding="utf8")
@@ -268,6 +265,3 @@ for i in dh_chunk:
     for f in find_offsets(i, "Fred and George"):
         fag = f
         #print(fag)
-C:\Users\Cordell\Anaconda3.1\lib\re.py:212: FutureWarning: split() requires a non-empty pattern match.
-  return _compile(pattern, flags).split(string, maxsplit)
-[]
